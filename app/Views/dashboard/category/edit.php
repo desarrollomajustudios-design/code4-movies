@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<form method="POST" action="/category/update/<?= $category['id'] ?>">
-    <?= view('category/_form', ['op' => 'Update']) ?>
+<form method="POST" action="/dashboard/category/update/<?= $category['id'] ?>">
+    <?= view('dashboard/category/_form', ['op' => 'Update']) ?>
 </form>
 </body>
 </html>

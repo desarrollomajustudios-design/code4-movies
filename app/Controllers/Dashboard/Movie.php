@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\MovieModel;
 
 class Movie extends BaseController
@@ -10,12 +11,12 @@ class Movie extends BaseController
     {
         $movieModel = new MovieModel();
         $movie = $movieModel->find($id);
-        echo view('movie/show', ['movie' => $movie]);
+        echo view('dashboard/movie/show', ['movie' => $movie]);
     }
 
     public function new()
     {
-        echo view('movie/new', [
+        echo view('dashboard/movie/new', [
             'movie' => [
                 'title' => '',
                 'description' => '',
@@ -31,13 +32,13 @@ class Movie extends BaseController
             'description' => $this->request->getPost('description'),
         ]);
 
-        echo 'Movie added';
+        return redirect()->to('/dashboard/movie');
     }
 
     public function edit($id)
     {
         $movieModel = new MovieModel();
-        echo view('movie/edit', ['movie' => $movieModel->find($id)]);
+        echo view('dashboard/movie/edit', ['movie' => $movieModel->find($id)]);
     }
 
     public function update($id)
@@ -47,21 +48,22 @@ class Movie extends BaseController
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description')
         ]);
-        echo 'Movie updated';
+
+        return redirect()->back();
     }
 
     public function delete($id)
     {
         $movieModel = new MovieModel();
         $movieModel->delete($id);
-        echo 'Movie deleted';
+        return redirect()->back();
     }
 
     public function index()
     {
         $movieModel = new MovieModel();
 
-        echo view('movie/index', [
+        echo view('dashboard/movie/index', [
             'movies' => $movieModel->findAll(),
         ]);
     }

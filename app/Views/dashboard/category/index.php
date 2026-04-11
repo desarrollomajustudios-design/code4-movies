@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Categories</h1>
-<a href="/category/new">New Category</a>
+<a href="/dashboard/category/new">New Category</a>
 <table>
     <tr>
         <th>ID</th>
@@ -18,9 +18,9 @@
         <tr>
             <td><?= $p['id'] ?></td>
             <td><?= $p['title'] ?></td>
-            <td><a href="/category/show/<?= $p['id'] ?>">DETAILS</a>
-                <a href="/category/edit/<?= $p['id'] ?>">EDIT</a>
-                <form action="/category/delete/<?= $p['id'] ?>" method="post">
+            <td><a href="/dashboard/category/show/<?= $p['id'] ?>">DETAILS</a>
+                <a href="/dashboard/category/edit/<?= $p['id'] ?>">EDIT</a>
+                <form action="/dashboard/category/delete/<?= $p['id'] ?>" method="post">
                     <button type="submit">DELETE</button>
                 </form>
             </td>

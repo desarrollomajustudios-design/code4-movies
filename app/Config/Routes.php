@@ -6,5 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->presenter('movie');
-$routes->presenter('category');
+
+$routes->group('dashboard', function ($routes) {
+    $routes->presenter('movie', ['controller' => 'Dashboard\Movie']);
+    $routes->presenter('category', ['except' => ['show'], 'controller' => 'Dashboard\Category']);
+});
+

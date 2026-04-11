@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\CategoryModel;
 
 class Category extends BaseController
@@ -10,12 +11,12 @@ class Category extends BaseController
     {
         $categoryModel = new CategoryModel();
         $category = $categoryModel->find($id);
-        echo view('category/show', ['category' => $category]);
+        echo view('dashboard/category/show', ['category' => $category]);
     }
 
     public function new()
     {
-        echo view('category/new', [
+        echo view('dashboard/category/new', [
             'category' => [
                 'title' => ''
             ]
@@ -29,13 +30,13 @@ class Category extends BaseController
             'title' => $this->request->getPost('title')
         ]);
 
-        echo 'Category Created';
+        return redirect()->to('/dashboard/category');
     }
 
     public function edit($id)
     {
         $categoryModel = new CategoryModel();
-        echo view('category/edit', ['category' => $categoryModel->find($id)]);
+        echo view('dashboard/category/edit', ['category' => $categoryModel->find($id)]);
     }
 
     public function update($id)
@@ -44,21 +45,21 @@ class Category extends BaseController
         $categoryModel->update($id, [
             'title' => $this->request->getPost('title'),
         ]);
-        echo 'Category updated';
+        return redirect()->back();
     }
 
     public function delete($id)
     {
         $categoryModel = new CategoryModel();
         $categoryModel->delete($id);
-        echo 'Category deleted';
+        return redirect()->back();
     }
 
     public function index()
     {
         $categoryModel = new CategoryModel();
 
-        echo view('category/index', [
+        echo view('dashboard/category/index', [
             'categories' => $categoryModel->findAll(),
         ]);
     }
