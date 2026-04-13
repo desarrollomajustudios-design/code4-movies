@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $movie['title'] ?></title>
+    <title><?= $movie->title ?></title>
 </head>
 <body>
-<h1><?= $movie['title'] ?></h1>
-<p><?= $movie['description'] ?></p>
+<h1><?= $movie->title ?></h1>
+<p><?= $movie->description ?></p>
 </body>
 </html>

@@ -17,9 +17,7 @@ class Category extends BaseController
     public function new()
     {
         echo view('dashboard/category/new', [
-            'category' => [
-                'title' => ''
-            ]
+            'category' => new CategoryModel()
         ]);
     }
 

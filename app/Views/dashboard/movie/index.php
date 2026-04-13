@@ -11,14 +11,14 @@ Movies
         <th>Description</th>
         <th>Actions</th>
     </tr>
-    <?php foreach ($movies as $key => $p): ?>
+    <?php foreach ($movies as $key => $m): ?>
         <tr>
-            <td><?= $p['id'] ?></td>
-            <td><?= $p['title'] ?></td>
-            <td><?= $p['description'] ?></td>
-            <td><a href="/dashboard/movie/show/<?= $p['id'] ?>">DETAILS</a>
-                <a href="/dashboard/movie/edit/<?= $p['id'] ?>">EDIT</a>
-                <form action="/dashboard/movie/delete/<?= $p['id'] ?>" method="post">
+            <td><?= $m->id ?></td>
+            <td><?= $m->title ?></td>
+            <td><?= $m->description ?></td>
+            <td><a href="/dashboard/movie/show/<?= $m->id ?>">DETAILS</a>
+                <a href="/dashboard/movie/edit/<?= $m->id ?>">EDIT</a>
+                <form action="/dashboard/movie/delete/<?= $m->id ?>" method="post">
                     <button type="submit">DELETE</button>
                 </form>
             </td>
