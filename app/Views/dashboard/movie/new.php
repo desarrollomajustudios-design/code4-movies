@@ -1,14 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>New Movie</title>
-</head>
-<body>
-
+<?php $this->extend('layouts/dashboard') ?>
+<?php $this->section('header') ?>
+New Movie
+<?php $this->endSection() ?>
+<?php $this->section('content') ?>
 <form method="POST" action="/dashboard/movie/create">
     <?= view('dashboard/movie/_form', ['op' => 'Create']) ?>
 </form>
-</body>
-</html>
+<?php $this->endSection() ?>
