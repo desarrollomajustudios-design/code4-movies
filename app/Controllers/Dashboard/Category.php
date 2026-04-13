@@ -26,9 +26,14 @@ class Category extends BaseController
     public function create()
     {
         $categoryModel = new CategoryModel();
-        $categoryModel->insert([
-            'title' => $this->request->getPost('title')
-        ]);
+        if ($this->validate('categories')) {
+            $categoryModel->insert([
+                'title' => $this->request->getPost('title')
+            ]);
+        } else {
+            session()->setFlashdata(['validation' => $this->validator]);
+            return redirect()->back()->withInput();
+        }
 
         return redirect()->to('/dashboard/category')->with('message', 'Category created!');
     }
@@ -42,9 +47,14 @@ class Category extends BaseController
     public function update($id)
     {
         $categoryModel = new CategoryModel();
-        $categoryModel->update($id, [
-            'title' => $this->request->getPost('title'),
-        ]);
+        if ($this->validate('categories')) {
+            $categoryModel->update($id, [
+                'title' => $this->request->getPost('title'),
+            ]);
+        } else {
+            session()->setFlashdata(['validation' => $this->validator]);
+            return redirect()->back()->withInput();
+        }
         return redirect()->back()->with('message', 'Category updated!');
     }
 

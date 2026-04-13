@@ -34,11 +34,20 @@ class Validation extends BaseConfig
      * @var array<string, string>
      */
     public array $templates = [
-        'list'   => 'CodeIgniter\Validation\Views\list',
+        'list' => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
 
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
+    public $categories = [
+        'title' => 'required|min_length[3]|max_length[255]',
+    ];
+
+    public $movies = [
+        'title' => 'required|min_length[3]|max_length[255]',
+        'description' => 'required|min_length[3]|max_length[255]',
+    ];
 }

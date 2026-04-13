@@ -27,11 +27,15 @@ class Movie extends BaseController
     public function create()
     {
         $movieModel = new MovieModel();
-        $movieModel->insert([
-            'title' => $this->request->getPost('title'),
-            'description' => $this->request->getPost('description'),
-        ]);
-
+        if ($this->validate('movies')) {
+            $movieModel->insert([
+                'title' => $this->request->getPost('title'),
+                'description' => $this->request->getPost('description'),
+            ]);
+        } else {
+            session()->setFlashdata(['validation' => $this->validator]);
+            return redirect()->back()->withInput();
+        }
         return redirect()->to('/dashboard/movie')->with('message', 'Movie added!');
     }
 
@@ -44,10 +48,15 @@ class Movie extends BaseController
     public function update($id)
     {
         $movieModel = new MovieModel();
-        $movieModel->update($id, [
-            'title' => $this->request->getPost('title'),
-            'description' => $this->request->getPost('description')
-        ]);
+        if ($this->validate('movies')) {
+            $movieModel->update($id, [
+                'title' => $this->request->getPost('title'),
+                'description' => $this->request->getPost('description')
+            ]);
+        } else {
+            session()->setFlashdata(['validation' => $this->validator]);
+            return redirect()->back()->withInput();
+        }
 
         return redirect()->back()->with('message', 'Movie updated!');
     }
