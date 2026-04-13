@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Categories</h1>
+<?= view('partials/_session'); ?>
 <a href="/dashboard/category/new">New Category</a>
 <table>
     <tr>

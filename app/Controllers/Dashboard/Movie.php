@@ -32,7 +32,7 @@ class Movie extends BaseController
             'description' => $this->request->getPost('description'),
         ]);
 
-        return redirect()->to('/dashboard/movie');
+        return redirect()->to('/dashboard/movie')->with('message', 'Movie added!');
     }
 
     public function edit($id)
@@ -49,13 +49,14 @@ class Movie extends BaseController
             'description' => $this->request->getPost('description')
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Movie updated!');
     }
 
     public function delete($id)
     {
         $movieModel = new MovieModel();
         $movieModel->delete($id);
+        session()->setFlashData('message', 'Movie deleted!');
         return redirect()->back();
     }
 

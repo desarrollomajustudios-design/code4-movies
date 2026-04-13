@@ -6,7 +6,7 @@
     <title>Update Category</title>
 </head>
 <body>
-
+<?= view('partials/_session'); ?>
 <form method="POST" action="/dashboard/category/update/<?= $category['id'] ?>">
     <?= view('dashboard/category/_form', ['op' => 'Update']) ?>
 </form>

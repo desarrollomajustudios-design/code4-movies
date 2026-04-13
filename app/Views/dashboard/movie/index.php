@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Movies List</h1>
+<?= view('partials/_session'); ?>
 <a href="/dashboard/movie/new">New Movie</a>
 <table>
     <tr>

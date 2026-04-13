@@ -30,7 +30,7 @@ class Category extends BaseController
             'title' => $this->request->getPost('title')
         ]);
 
-        return redirect()->to('/dashboard/category');
+        return redirect()->to('/dashboard/category')->with('message', 'Category created!');
     }
 
     public function edit($id)
@@ -45,14 +45,16 @@ class Category extends BaseController
         $categoryModel->update($id, [
             'title' => $this->request->getPost('title'),
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Category updated!');
     }
 
     public function delete($id)
     {
         $categoryModel = new CategoryModel();
         $categoryModel->delete($id);
+        session()->setFlashdata('message', 'Category deleted!');
         return redirect()->back();
+//        return redirect()->back()->with('message', 'Category deleted!');
     }
 
     public function index()
