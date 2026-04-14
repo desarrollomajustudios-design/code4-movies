@@ -7,6 +7,11 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes) {
+    $routes->resource('movie');
+    $routes->resource('category');
+});
+
 $routes->group('dashboard', function ($routes) {
     $routes->presenter('movie', ['controller' => 'Dashboard\Movie']);
     $routes->presenter('category', ['except' => ['show'], 'controller' => 'Dashboard\Category']);
