@@ -10,5 +10,6 @@ class InitialSeeder extends Seeder
     {
         $this->call('CategorySeeder');
         $this->call('MovieSeeder');
+        $this->call('TagSeeder');
     }
 }

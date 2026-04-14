@@ -9,6 +9,7 @@ Movies
         <th>ID</th>
         <th>Movie</th>
         <th>Description</th>
+        <th>Category</th>
         <th>Actions</th>
     </tr>
     <?php foreach ($movies as $key => $m): ?>
@@ -16,8 +17,10 @@ Movies
             <td><?= $m->id ?></td>
             <td><?= $m->title ?></td>
             <td><?= $m->description ?></td>
+            <td><?= $m->category ?></td>
             <td><a href="/dashboard/movie/show/<?= $m->id ?>">DETAILS</a>
                 <a href="/dashboard/movie/edit/<?= $m->id ?>">EDIT</a>
+                <a href="<?= route_to('movie.tags', $m->id) ?>">TAGS</a>
                 <form action="/dashboard/movie/delete/<?= $m->id ?>" method="post">
                     <button type="submit">DELETE</button>
                 </form>

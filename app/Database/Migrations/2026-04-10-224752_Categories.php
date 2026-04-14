@@ -21,7 +21,7 @@ class Categories extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('categories');
+        $this->forge->createTable('categories', true, ['ENGINE' => 'InnoDB']);
     }
 
     public function down()

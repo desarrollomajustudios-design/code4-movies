@@ -2,6 +2,7 @@
 
 namespace App\Database\Seeds;
 
+use App\Models\CategoryModel;
 use App\Models\MovieModel;
 use CodeIgniter\Database\Seeder;
 
@@ -10,6 +11,8 @@ class MovieSeeder extends Seeder
     public function run()
     {
         $movieModel = new MovieModel();
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->limit(3)->findAll();
 
         $movieModel->where('id >=', 1)->delete();
 
@@ -17,14 +20,17 @@ class MovieSeeder extends Seeder
             [
                 'title' => 'The Shawshank Redemption',
                 'description' => 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
+                'category_id' => $categories[0]->id,
             ],
             [
                 'title' => 'The Irishman',
                 'description' => 'A mob hitman recalls his possible involvement with the slaying of Jimmy Hoffa.',
+                'category_id' => $categories[1]->id,
             ],
             [
                 'title' => 'The Godfather',
                 'description' => 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
+                'category_id' => $categories[2]->id,
             ],
         ]);
     }

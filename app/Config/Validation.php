@@ -49,10 +49,17 @@ class Validation extends BaseConfig
     public $movies = [
         'title' => 'required|min_length[3]|max_length[255]',
         'description' => 'required|min_length[3]|max_length[255]',
+        'category_id' => 'required|is_natural_no_zero',
     ];
     public $users = [
         'user' => 'required|min_length[3]|max_length[20]|is_unique[users.user]',
         'email' => 'required|min_length[3]|max_length[70]|is_unique[users.email]',
         'password' => 'required|min_length[5]|max_length[20]',
     ];
+
+    public $tags = [
+        'title' => 'required|min_length[3]|max_length[255]',
+        'category_id' => 'permit_empty|is_natural_no_zero',
+    ];
+
 }

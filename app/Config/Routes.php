@@ -13,7 +13,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 });
 
 $routes->group('dashboard', function ($routes) {
+    $routes->get('movie/tag/(:num)', 'Dashboard\Movie::tags/$1', ['as' => 'movie.tags']);
+    $routes->post('movie/tag/(:num)', 'Dashboard\Movie::tags_post/$1', ['as' => 'movie.tags']);
+    $routes->post('movie/(:num)/tag/(:num)/delete', 'Dashboard\Movie::tag_delete/$1/$2', ['as' => 'movie.tag.delete']);
+
     $routes->presenter('movie', ['controller' => 'Dashboard\Movie']);
+    $routes->presenter('tag', ['controller' => 'Dashboard\Tag']);
     $routes->presenter('category', ['except' => ['show'], 'controller' => 'Dashboard\Category']);
 //    $routes->get('user/create', 'Web\User::create_user');
 });
