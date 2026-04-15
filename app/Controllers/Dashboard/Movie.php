@@ -64,6 +64,7 @@ class Movie extends BaseController
                 'description' => $this->request->getPost('description'),
                 'category_id' => $this->request->getPost('category_id'),
             ]);
+            $this->asign_image($id);
         } else {
             session()->setFlashdata(['validation' => $this->validator]);
             return redirect()->back()->withInput();
@@ -83,7 +84,7 @@ class Movie extends BaseController
     public function index()
     {
         $movieModel = new MovieModel();
-        $this->asignImage();
+//        $this->asignImage();
 
 
         $data['movies'] = $movieModel->select('movies.*,categories.title as category')->join('categories', 'categories.id = movies.category_id')->findAll();
@@ -137,26 +138,66 @@ class Movie extends BaseController
         $movieTagModel->where('movie_id', $movieId)->where('tag_id', $tagId)->delete();
 
         return $this->response->setJSON(['message' => 'Tag deleted!']);
-
     }
 
-
-    private function generateImage()
+    public function delete_image($imageId)
     {
         $imageModel = new ImageModel();
-        $imageModel->insert([
-            'image' => date('Y-m-d H:m:s'),
-            'extension' => 'Pending',
-            'data' => 'Pending',
-        ]);
+        $movieImageModel = new movieImageModel();
+
+        $image = $imageModel->find($imageId);
+        if (!$image) {
+            return 'image not found';
+        }
+        $imageRoute = 'uploads/movies/' . $image->image;
+        unlink($imageRoute);
+
+        $movieImageModel->where('image_id', $imageId)->delete();
+        $imageModel->delete($imageId);
+
+        return redirect()->back()->with('message', 'Image deleted!');
     }
 
-    private function asignImage()
+    public function download_image($imageId)
     {
-        $movieImageModel = new movieImageModel();
-        $movieImageModel->insert([
-            'image_id' => 2,
-            'movie_id' => 4,
-        ]);
+        $imageModel = new ImageModel();
+        $image = $imageModel->find($imageId);
+        if (!$image) {
+            return 'image not found';
+        }
+        $imageRoute = 'uploads/movies/' . $image->image;
+        return $this->response->download($imageRoute, null);
+    }
+
+    private function asign_image($movieId)
+    {
+        if ($imageFile = $this->request->getFile('image')) {
+            if ($imageFile->isValid()) {
+                $validationRules = $this->validate([
+                    'image' => 'uploaded[image]|mime_in[image,image/jpg,image/jpeg,image/png]|max_size[image,1024]|is_image[image]'
+                ]);
+                if ($validationRules) {
+                    $newName = $imageFile->getRandomName();
+                    $ext = $imageFile->guessExtension();
+
+//                  $imageFile->move(WRITEPATH . 'uploads/movies', $newName);
+                    $imageFile->move('../public/uploads/movies', $newName);
+
+                    $imageModel = new ImageModel();
+                    $imageId = $imageModel->insert([
+                        'image' => $newName,
+                        'extension' => $ext,
+                        'data' => 'Pending',
+                    ]);
+                    $movieImageModel = new movieImageModel();
+                    $movieImageModel->insert([
+                        'image_id' => $imageId,
+                        'movie_id' => $movieId,
+                    ]);
+
+                }
+                return $this->validator->listErrors();
+            }
+        }
     }
 }

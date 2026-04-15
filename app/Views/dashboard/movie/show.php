@@ -7,7 +7,15 @@
 <h3>Images</h3>
 <ul>
     <?php foreach ($images as $i) : ?>
-        <li><?= $i->image ?></li>
+        <li>
+            <img src="/uploads/movies/<?= $i->image ?>" alt="" width="200px">
+            <form method="post" action="<?= route_to('movie.image.delete', $i->id) ?>">
+                <button type="submit">Delete</button>
+            </form>
+            <form method="get" action="<?= route_to('movie.image.download', $i->id) ?>">
+                <button type="submit">Download</button>
+            </form>
+        </li>
     <?php endforeach ?>
 </ul>
 

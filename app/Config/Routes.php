@@ -16,6 +16,8 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('movie/tag/(:num)', 'Dashboard\Movie::tags/$1', ['as' => 'movie.tags']);
     $routes->post('movie/tag/(:num)', 'Dashboard\Movie::tags_post/$1', ['as' => 'movie.tags']);
     $routes->post('movie/(:num)/tag/(:num)/delete', 'Dashboard\Movie::tag_delete/$1/$2', ['as' => 'movie.tag.delete']);
+    $routes->post('movie/(:num)/delete', 'Dashboard\Movie::delete_image/$1', ['as' => 'movie.image.delete']);
+    $routes->get('movie/download/(:num)', 'Dashboard\Movie::download_image/$1', ['as' => 'movie.image.download']);
 
     $routes->presenter('movie', ['controller' => 'Dashboard\Movie']);
     $routes->presenter('tag', ['controller' => 'Dashboard\Tag']);

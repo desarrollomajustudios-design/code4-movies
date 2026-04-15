@@ -8,5 +8,6 @@ class ImageModel extends Model
 {
     protected $table = 'images';
     protected $primaryKey = 'id';
+    protected $returnType = 'object';
     protected $allowedFields = ['image', 'extension', 'data'];
 }

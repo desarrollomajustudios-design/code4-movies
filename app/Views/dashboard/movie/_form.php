@@ -14,4 +14,10 @@
 <textarea name="description" id="description">
         <?= old('description', $movie->description) ?>
     </textarea>
+<?php
+if ($movie->id) : ?>
+    <label for="image">Image</label>
+    <input type="file" name="image" id="image">
+<?php endif; ?>
+
 <button type="submit"><?= $op ?></button>
