@@ -13,7 +13,8 @@ class Tag extends BaseController
         $tagModel = new TagModel();
         $data['tags'] = $tagModel->select('tags.*, categories.title as category')
             ->join('categories', 'categories.id = tags.category_id', 'left')
-            ->findAll();
+            ->paginate(10);
+        $data['pager'] = $tagModel->pager;
 
         echo view('dashboard/tag/index', $data);
     }

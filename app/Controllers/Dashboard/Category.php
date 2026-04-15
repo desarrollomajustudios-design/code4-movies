@@ -70,7 +70,8 @@ class Category extends BaseController
         $categoryModel = new CategoryModel();
 
         echo view('dashboard/category/index', [
-            'categories' => $categoryModel->findAll(),
+            'categories' => $categoryModel->paginate(10),
+            'pager' => $categoryModel->pager
         ]);
     }
 }

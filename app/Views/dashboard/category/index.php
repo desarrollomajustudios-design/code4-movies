@@ -23,6 +23,7 @@ Categories
         </tr>
     <?php endforeach; ?>
 </table>
+<?= $pager->links() ?>
 <?php $this->endSection(); ?>
 
 

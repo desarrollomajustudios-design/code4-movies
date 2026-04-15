@@ -87,7 +87,10 @@ class Movie extends BaseController
 //        $this->asignImage();
 
 
-        $data['movies'] = $movieModel->select('movies.*,categories.title as category')->join('categories', 'categories.id = movies.category_id')->findAll();
+        $data = ['movies' => $movieModel->select('movies.*,categories.title as category')
+            ->join('categories', 'categories.id = movies.category_id')
+            ->paginate(10), 'pager' => $movieModel->pager
+        ];
 
         echo view('dashboard/movie/index', $data);
     }
@@ -187,7 +190,7 @@ class Movie extends BaseController
                     $imageId = $imageModel->insert([
                         'image' => $newName,
                         'extension' => $ext,
-                        'data' => 'Pending',
+                        'data' => json_encode(get_file_info('../public/uploads/movies/' . $newName)),
                     ]);
                     $movieImageModel = new movieImageModel();
                     $movieImageModel->insert([
