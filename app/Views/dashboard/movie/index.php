@@ -3,8 +3,8 @@
 Movies
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
-<a href="/dashboard/movie/new">New Movie</a>
-<table>
+<a class="btn btn-success mb-4" href="/dashboard/movie/new">New Movie</a>
+<table class="table">
     <tr>
         <th>ID</th>
         <th>Movie</th>
@@ -18,11 +18,11 @@ Movies
             <td><?= $m->title ?></td>
             <td><?= $m->description ?></td>
             <td><?= $m->category ?></td>
-            <td><a href="/dashboard/movie/show/<?= $m->id ?>">DETAILS</a>
-                <a href="/dashboard/movie/edit/<?= $m->id ?>">EDIT</a>
-                <a href="<?= route_to('movie.tags', $m->id) ?>">TAGS</a>
+            <td><a class="btn btn-outline-primary btn-sm mb-1" href="/dashboard/movie/show/<?= $m->id ?>">DETAILS</a>
+                <a class="btn btn-outline-secondary btn-sm mb-1" href="/dashboard/movie/edit/<?= $m->id ?>">EDIT</a>
+                <a class="btn btn-outline-info btn-sm mb-1" href="<?= route_to('movie.tags', $m->id) ?>">TAGS</a>
                 <form action="/dashboard/movie/delete/<?= $m->id ?>" method="post">
-                    <button type="submit">DELETE</button>
+                    <button class="btn btn-outline-danger btn-sm mb-1" type="submit">DELETE</button>
                 </form>
             </td>
         </tr>

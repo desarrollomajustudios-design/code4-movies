@@ -3,8 +3,8 @@
 Categories
 <?php $this->endSection(); ?>
 <?php $this->section('content'); ?>
-<a href="/dashboard/category/new">New Category</a>
-<table>
+<a class="btn btn-success mb-4" href="/dashboard/category/new">New Category</a>
+<table class="table">
     <tr>
         <th>ID</th>
         <th>Category</th>
@@ -14,10 +14,10 @@ Categories
         <tr>
             <td><?= $p->id ?></td>
             <td><?= $p->title ?></td>
-            <td><a href="/dashboard/category/show/<?= $p->id ?>">DETAILS</a>
-                <a href="/dashboard/category/edit/<?= $p->id ?>">EDIT</a>
+            <td><a class="btn btn-outline-primary btn-sm mb-1" href="/dashboard/category/show/<?= $p->id ?>">DETAILS</a>
+                <a class="btn btn-outline-secondary btn-sm mb-1" href="/dashboard/category/edit/<?= $p->id ?>">EDIT</a>
                 <form action="/dashboard/category/delete/<?= $p->id ?>" method="post">
-                    <button type="submit">DELETE</button>
+                    <button class="btn btn-outline-danger btn-sm mb-1" type="submit">DELETE</button>
                 </form>
             </td>
         </tr>
