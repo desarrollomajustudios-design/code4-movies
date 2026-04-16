@@ -8,6 +8,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes) {
+    $routes->get('movie/paginate', 'Movie::list');
+    $routes->get('movie/paginate_full', 'Movie::listFull');
+    $routes->get('movie/index_for_category/(:num)', 'Movie::index_for_category/$1');
+    $routes->get('movie/index_for_tag/(:num)', 'Movie::index_for_tag/$1');
+    $routes->post('movie/tag/(:num)', 'Movie::tags_post/$1', ['as' => 'movie.tags']);
+    $routes->post('movie/(:num)/tag/(:num)/delete', 'Movie::tag_delete/$1/$2', ['as' => 'movie.tag.delete']);
+
     $routes->resource('movie');
     $routes->resource('category');
 });
