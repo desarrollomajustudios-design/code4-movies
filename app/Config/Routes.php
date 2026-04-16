@@ -25,6 +25,15 @@ $routes->group('dashboard', function ($routes) {
 //    $routes->get('user/create', 'Web\User::create_user');
 });
 
+$routes->group('blog', ['namespace' => 'App\Controllers\Blog'], function ($routes) {
+//    $routes->presenter('', ['only' => ['index', 'show'], 'controller' => 'Movie']);
+    $routes->get('tags/(:num)', 'Movie::index_for_tags/$1', ['as' => 'blog.movie.index_for_tags']);
+    $routes->get('category/(:num)', 'Movie::index_for_categories/$1', ['as' => 'blog.movie.index_for_category']);
+    $routes->get('', 'Movie::index', ['as' => 'blog.movie.index']);
+    $routes->get('(:num)', 'Movie::show/$1', ['as' => 'blog.movie.show']);
+    $routes->get('tags_by_category/(:num)', 'Movie::tagsByCategory/$1', ['as' => 'blog.movie.tagsByCategory']);
+});
+
 $routes->get('login', 'Web\User::login', ['as' => 'user.login']);
 $routes->post('login_user', 'Web\User::login_user', ['as' => 'user.login_user']);
 
